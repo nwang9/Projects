@@ -13,21 +13,18 @@
         <conv:BoolToVisibilityConverter x:Key="ViewConverter" />
     </Window.Resources>
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
         <ListBox Width="Auto" Grid.Row="1" ItemsSource="{Binding Services}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding Path=ServiceName}" />
                         <Button Content="{Binding Path=IsServiceStopped, Converter={StaticResource converter}}" 
-                         Command="{Binding CopyClickCommand}" Height="41" Margin="0,0,-0.333,0" VerticalAlignment="Bottom"/>
-                        <CheckBox  x:Name="UDC" IsChecked="{Binding UserData.UseDefaultCredentials, Mode=TwoWay}" 
-                         IsEnabled="{Binding UserData.IsServiceStopped, Mode=OneWay}">Use Default Credentials>
+                         Command="{Binding StartClickCommand}" CommandParameter="{Binding Path=ServiceType}" Height="41" Margin="0,0,-0.333,0" VerticalAlignment="Bottom"/>
+                        <CheckBox IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Command="{Binding ViewClickCommand}" IsEnabled="{Binding Command, Mode=OneWay}">Show Parameters
                         </CheckBox>
                     </StackPanel>
                 </DataTemplate>
@@ -38,10 +35,10 @@
             <Button Content="Browse" Command="{Binding EmailClickCommand}" CommandParameter="Browse Files"/>
             <TextBox TextWrapping="WrapWithOverflow" Height ="Auto" Text="{Binding UserData.XmlFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
         </StackPanel>
-        <StackPanel Visibility="{Binding ViewData.EmailServiceVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ViewConverter}}" Name="EmailGrid" Background="{Binding UserData.IsServiceStopped, Converter={StaticResource ColorConverter}}" >
+        <StackPanel Visibility="{Binding ViewData.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ViewConverter}}" Name="EmailGrid" Background="{Binding UserData.IsServiceStopped, Converter={StaticResource ColorConverter}}" >
                 <Label FontWeight="Bold">Email Service</Label>
                 <CheckBox  x:Name="UDC" IsChecked="{Binding UserData.UseDefaultCredentials, Mode=TwoWay}" 
-             IsEnabled="{Binding UserData.IsServiceStopped, Mode=OneWay}">Use Default Credentials>
+             IsEnabled="{Binding UserData.IsServiceStopped, Mode=OneWay}">Use Default Credentials
                 </CheckBox>
                 <CheckBox x:Name="Ss1" IsChecked="{Binding UserData.EnableSs1, Mode=TwoWay}" 
              IsEnabled="{Binding UserData.IsServiceStopped, Mode=OneWay}">Enable Ssl
@@ -57,10 +54,9 @@
                     </TextBox>
                 </Border>
                 <Button Content="Browse" Command="{Binding EmailClickCommand}" CommandParameter="Browse"/>
-                <TextBox TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding UserData.XmlFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
-                <Button  Content="{Binding UserData.IsServiceStopped, Converter={StaticResource converter}}" Command="{Binding EmailClickCommand}" Margin="0,0,-0.333,0" VerticalAlignment="Bottom"/>
-            </StackPanel>
-            <StackPanel Visibility="{Binding ViewData.CopyServiceVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ViewConverter}}" Name="CopyGrid" Background="{Binding CopyData.IsServiceStopped, Converter={StaticResource ColorConverter}}" >
+            <TextBox TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding UserData.XmlFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
+        </StackPanel>
+            <StackPanel Visibility="{Binding ViewData.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ViewConverter}}" Name="CopyGrid" Background="{Binding CopyData.IsServiceStopped, Converter={StaticResource ColorConverter}}" >
             <Label FontWeight="Bold">FileCopy Service</Label>
             <Button Content="Browse Target Source" Command="{Binding CopyClickCommand}" CommandParameter="Browse_Source"/>
             <TextBox IsEnabled="{Binding CopyData.IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding CopyData.SourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>

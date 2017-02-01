@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +17,14 @@ namespace SmtpParameters
         public MainWindowViewModel()
         {
             UserData = new SmtpDataModel();
-            CopyData  = new CopyDataModel();
-            ViewData = new ViewDataModel();
+            CopyData = new CopyDataModel();
             this.EmailClickCommand = new EmailCommandHandler(this);
             this.CopyClickCommand = new CopyCommandHandler(this);
+            this.StartClickCommand = new StartStopCommandHandler(this);
+            this.ViewClickCommand = new VisibilityCommandHandler(this);
             FillUserData();
         }
-            System.Collections.ObjectModel.ObservableCollection<ServiceBase> services = new System.Collections.ObjectModel.ObservableCollection<ServiceBase>();
+        System.Collections.ObjectModel.ObservableCollection<ServiceBase> services = new System.Collections.ObjectModel.ObservableCollection<ServiceBase>();
         // Accessors
         public System.Collections.ObjectModel.ObservableCollection<ServiceBase> Services
         {
@@ -34,19 +35,18 @@ namespace SmtpParameters
                 OnPropertyChanged();
             }
         }
-
         public SmtpDataModel UserData
         { get; set; }
 
         public string FirstXml { get; set; }
 
-        public ViewDataModel ViewData
-        { get; set; }
 
         public CopyDataModel CopyData
         { get; set; }
 
         public EmailCommandHandler EmailClickCommand { get; set; }
+        public VisibilityCommandHandler ViewClickCommand {get; set; }
+        public StartStopCommandHandler StartClickCommand { get; set; }
         public CopyCommandHandler CopyClickCommand { get; set; }
 
         //Fill_User_Data method
@@ -119,21 +119,6 @@ namespace SmtpParameters
         }
         //End of Stop_Email_Service
 
-        //Email_Click Event
-        public void Email_Click()
-        {            
-            if (UserData.IsServiceStopped == true)
-            {
-                Start_Email_Service();
-                UserData.IsServiceStopped = false;
-            }
-            else
-            {
-                Stop_Email_Service();
-                UserData.IsServiceStopped = true;
-            }
-        }
-
         public void Email_Browse()
         {
             // Configure open file dialog box
@@ -173,26 +158,39 @@ namespace SmtpParameters
                 //Find service type and add serice
                 XmlDocument doc = new XmlDocument();
                 doc.Load(UserData.XmlFile);
-                if (doc.GetElementsByTagName("ServiceType")[0].InnerText == "Mail")
+                if (doc.GetElementsByTagName("ServiceType")[0].InnerText == "Email")
                     Services.Add(UserData);
                 else if (doc.GetElementsByTagName("ServiceType")[0].InnerText == "Copy")
                     Services.Add(CopyData);
             }
         }
 
-        public void Copy_Click()
-        {
-            if (CopyData.IsServiceStopped == true)
-            {
-                Start_Copy_Service();
-                CopyData.IsServiceStopped = false;
-            }
-            else
-            {
-                Stop_Copy_Service();
-                CopyData.IsServiceStopped = true;
-            }
-        }
+        //public void Start_Stop_Click(object)
+        //{
+        //    string ServiceType = Convert.ToString(object);
+        //    serviceObject = ViewData.Services.Find(x => x.ServiceName.Contains(ServiceType));
+
+        //    if (IsServiceStopped == true)
+        //    {
+        //        Start_+"{ServiceType}"+_Service();
+        //        serviceObject.IsServiceStopped = false;
+        //    }
+        //    else
+        //    {
+        //        Stop_+"{ServiceType}"+_Service();
+        //        serviceObject.IsServiceStopped = true;
+        //    }
+        //}
+
+        //public object View(value)
+        //{
+        //    if (value == "Email")
+        //        if (CopyData.IsVisible)
+        //            return false;
+        //    else if (value == "Copy")
+        //        if (UserData.IsVisible)
+        //            return false;
+        //}
 
 
         public void Browse_Source()

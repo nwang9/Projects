@@ -6,33 +6,20 @@ using System.Threading.Tasks;
 
 namespace SmtpParameters
 {
-    class CopyDataModel : ObservableObject
+    public class CopyDataModel : ServiceBase
     {
-        string sourcepath;
-        string targetpath;
-        bool isCopyServiceStopped;
+        public string sourcepath;
+        public string targetpath;
 
         public CopyDataModel()
         {
             SourcePath = "";
             TargetPath = "";
-            isCopyServiceStopped = true;
+            ServiceName = "Copy Service";
+            IsServiceStopped = true;
         }
 
-        public bool IsCopyServiceStopped
-        {
-            get
-            {
-                return isCopyServiceStopped;
-            }
-            set
-            {
-                isCopyServiceStopped = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool SourcePath
+        public string SourcePath
         {
             get
             {
@@ -45,7 +32,7 @@ namespace SmtpParameters
             }
         }
 
-        public bool TargetPath
+        public string TargetPath
         {
             get
             {

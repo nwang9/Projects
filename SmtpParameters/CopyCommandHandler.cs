@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SmtpParameters
 {
-    class CopyCommandHandler : ICommand
+    public class CopyCommandHandler : ICommand
     {
         public MainWindowViewModel ViewModel;
         // constructor

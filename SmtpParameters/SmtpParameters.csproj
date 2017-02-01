@@ -59,12 +59,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="CopyCommandHandler.cs" />
     <Compile Include="CopyDataModel.cs" />
     <Compile Include="EmailCommandHandler.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToStartStopServiceButtonTextConverter.cs" />
+    <Compile Include="ServiceBase.cs" />
     <Compile Include="SmtpDataModel.cs" />
+    <Compile Include="ViewDataModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

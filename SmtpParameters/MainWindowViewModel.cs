@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,20 +18,41 @@ namespace SmtpParameters
         {
             UserData = new SmtpDataModel();
             CopyData  = new CopyDataModel();
+            ViewData = new ViewDataModel();
             this.EmailClickCommand = new EmailCommandHandler(this);
             this.CopyClickCommand = new CopyCommandHandler(this);
             FillUserData();
         }
+            System.Collections.ObjectModel.ObservableCollection<ServiceBase> services = new System.Collections.ObjectModel.ObservableCollection<ServiceBase>();
         // Accessors
+        public System.Collections.ObjectModel.ObservableCollection<ServiceBase> Services
+        {
+            get { return services; }
+            set
+            {
+                services = value;
+                OnPropertyChanged();
+            }
+        }
+
         public SmtpDataModel UserData
         { get; set; }
 
+        public string FirstXml { get; set; }
+
+        public ViewDataModel ViewData
+        { get; set; }
+
+        public CopyDataModel CopyData
+        { get; set; }
+
         public EmailCommandHandler EmailClickCommand { get; set; }
+        public CopyCommandHandler CopyClickCommand { get; set; }
 
         //Fill_User_Data method
         public void FillUserData()
         {
-            string xmlFile = UserData.ContactsFile;
+            string xmlFile = UserData.XmlFile;
             XmlDocument doc = new XmlDocument();
             doc.Load(xmlFile);
             FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.Write, xmlFile);
@@ -47,7 +68,7 @@ namespace SmtpParameters
         // Start_Email_Service method
         public void Start_Email_Service()
         {
-            string xmlFile = UserData.ContactsFile;
+            string xmlFile = UserData.XmlFile;
             XmlDocument doc = new XmlDocument();
             doc.Load(xmlFile);
             FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.Write, xmlFile);
@@ -73,7 +94,7 @@ namespace SmtpParameters
             catch
             {
                 Console.WriteLine("Could not start the Email service.");
-                // IsEmailServiceStopped = true;
+                // IsServiceStopped = true;
             }
         }
         //End of Start_Email_Service method
@@ -93,7 +114,7 @@ namespace SmtpParameters
             catch
             {
                 Console.WriteLine("Could not stop the Email service.");
-                //IsEmailServiceStopped = false;
+                //IsServiceStopped = false;
             }
         }
         //End of Stop_Email_Service
@@ -101,15 +122,15 @@ namespace SmtpParameters
         //Email_Click Event
         public void Email_Click()
         {            
-            if (UserData.IsEmailServiceStopped == true)
+            if (UserData.IsServiceStopped == true)
             {
                 Start_Email_Service();
-                UserData.IsEmailServiceStopped = false;
+                UserData.IsServiceStopped = false;
             }
             else
             {
                 Stop_Email_Service();
-                UserData.IsEmailServiceStopped = true;
+                UserData.IsServiceStopped = true;
             }
         }
 
@@ -128,25 +149,136 @@ namespace SmtpParameters
             if (result == true)
             {
                 // Open document
-                UserData.ContactsFile = dlg.FileName;
+                UserData.XmlFile = dlg.FileName;
             }
         }
         //end of Email_browse click function
 
+        public void File_Browse()
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "XML Files (.xml)|*.xml| Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                UserData.XmlFile = dlg.FileName;
+                //Find service type and add serice
+                XmlDocument doc = new XmlDocument();
+                doc.Load(UserData.XmlFile);
+                if (doc.GetElementsByTagName("ServiceType")[0].InnerText == "Mail")
+                    Services.Add(UserData);
+                else if (doc.GetElementsByTagName("ServiceType")[0].InnerText == "Copy")
+                    Services.Add(CopyData);
+            }
+        }
+
         public void Copy_Click()
         {
-
+            if (CopyData.IsServiceStopped == true)
+            {
+                Start_Copy_Service();
+                CopyData.IsServiceStopped = false;
+            }
+            else
+            {
+                Stop_Copy_Service();
+                CopyData.IsServiceStopped = true;
+            }
         }
 
 
         public void Browse_Source()
         {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "XML Files (.xml)|*.xml| Text documents (.txt)|*.txt"; // Filter files by extension
 
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                CopyData.SourcePath = dlg.FileName;
+            }
         }
 
         public void Browse_Target()
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "XML Files (.xml)|*.xml| Text documents (.txt)|*.txt"; // Filter files by extension
 
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                CopyData.TargetPath = dlg.FileName;
+            }
         }
+        //
+        // Start_Copy_Service method
+        public void Start_Copy_Service()
+        {
+            string xmlFile = @"C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\FileCopyService\FileCopyService\copyfiledata.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFile);
+            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.Write, xmlFile);
+
+            // Change to new elements
+            doc.GetElementsByTagName("SourcePath")[0].InnerText = Convert.ToString(CopyData.SourcePath);
+            doc.GetElementsByTagName("TargetPath")[0].InnerText = Convert.ToString(CopyData.TargetPath);
+            // Save changes
+            doc.Save(xmlFile);
+
+            // Start service after settings are changed
+            ServiceController CopyService = new ServiceController("CopyService", Environment.MachineName);
+            try
+            {
+                CopyService.Start();
+                CopyService.Refresh();
+            }
+            catch
+            {
+                Console.WriteLine("Could not start the Copy service.");
+            }
+        }
+        //End of Start_Copy_Service method
+
+        //Stop_Copy_Service method
+        public void Stop_Copy_Service()
+        {
+            ServiceController CopyService = new ServiceController("CopyService", Environment.MachineName);
+            try
+            {
+                // Stop service or stop on timeout
+                TimeSpan timeout = new TimeSpan(0, 5, 0);
+                CopyService.Stop();
+                CopyService.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
+                CopyService.Refresh();
+            }
+            catch
+            {
+                Console.WriteLine("Could not stop the Copy service.");
+            }
+        }
+        //
     }
 }
 

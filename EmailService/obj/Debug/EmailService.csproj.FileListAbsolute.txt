@@ -1,0 +1,9 @@
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\bin\Debug\EmailService.exe.config
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\obj\Debug\EmailService.ProjectInstaller.resources
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\obj\Debug\EmailService.csproj.GenerateResource.Cache
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\bin\Debug\EmailService.exe
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\bin\Debug\EmailService.pdb
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\obj\Debug\EmailService.EmailService.resources
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\obj\Debug\EmailService.exe
+c:\users\nicowang9\documents\visual studio 2015\Projects\EmailService\EmailService\obj\Debug\EmailService.pdb
+C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\EmailService\EmailService\obj\Debug\EmailService.csprojResolveAssemblyReference.cache

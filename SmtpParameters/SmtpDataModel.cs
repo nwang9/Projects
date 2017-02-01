@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace SmtpParameters
 {
-    public class SmtpDataModel : ObservableObject
+    public class SmtpDataModel : ServiceBase
     {
         public string host;
         public int port;
         public bool enableSs1;
         public bool useDefaultCredentials;
-        public bool isEmailServiceStopped;
-        public string contactsFile;
 
         public SmtpDataModel()
         { 
@@ -21,35 +19,11 @@ namespace SmtpParameters
             Port = 587;
             EnableSs1 = true;
             UseDefaultCredentials = false;
-            IsEmailServiceStopped = true;
-            contactsFile = @"C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\EmailService\EmailService\emails.xml";
+            IsServiceStopped = true;
+            XmlFile = @"C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\EmailService\EmailService\emails.xml";
+            ServiceName = "Email Service";
         }
 
-        public bool IsEmailServiceStopped
-        {
-            get
-            {
-                return isEmailServiceStopped;
-            }
-            set
-            {
-                isEmailServiceStopped = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string ContactsFile
-        {
-            get
-            {
-                return contactsFile;
-            }
-            set
-            {
-                contactsFile = value;
-                OnPropertyChanged();
-            }
-        }
         public string Host
         {
             get { return host; }

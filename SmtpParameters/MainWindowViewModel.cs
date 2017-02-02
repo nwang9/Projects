@@ -14,14 +14,24 @@ namespace SmtpParameters
 {
     public class MainWindowViewModel : ObservableObject
     {
+        private ServiceBase selectedService;
+
+        public ServiceBase SelectedService
+        {
+            get { return selectedService; }
+            set {
+                selectedService = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainWindowViewModel()
         {
             UserData = new SmtpDataModel();
             CopyData = new CopyDataModel();
-            this.EmailClickCommand = new EmailCommandHandler(this);
+            this.ServiceSelectionClickCommand = new EmailCommandHandler(this);
             this.CopyClickCommand = new CopyCommandHandler(this);
             this.StartClickCommand = new StartStopCommandHandler(this);
-            this.ViewClickCommand = new VisibilityCommandHandler(this);
             FillUserData();
         }
         System.Collections.ObjectModel.ObservableCollection<ServiceBase> services = new System.Collections.ObjectModel.ObservableCollection<ServiceBase>();
@@ -37,15 +47,9 @@ namespace SmtpParameters
         }
         public SmtpDataModel UserData
         { get; set; }
-
-        public string FirstXml { get; set; }
-
-
         public CopyDataModel CopyData
         { get; set; }
-
-        public EmailCommandHandler EmailClickCommand { get; set; }
-        public VisibilityCommandHandler ViewClickCommand {get; set; }
+        public EmailCommandHandler ServiceSelectionClickCommand { get; set; }
         public StartStopCommandHandler StartClickCommand { get; set; }
         public CopyCommandHandler CopyClickCommand { get; set; }
 
@@ -165,33 +169,22 @@ namespace SmtpParameters
             }
         }
 
-        //public void Start_Stop_Click(object)
-        //{
-        //    string ServiceType = Convert.ToString(object);
-        //    serviceObject = ViewData.Services.Find(x => x.ServiceName.Contains(ServiceType));
+        public void Start_Stop_Click(string serviceType)
+        {
+            //string ServiceType = serviceType;
+            //object serviceObject = Services.Find(x => x.ServiceName.Contains(ServiceType));
 
-        //    if (IsServiceStopped == true)
-        //    {
-        //        Start_+"{ServiceType}"+_Service();
-        //        serviceObject.IsServiceStopped = false;
-        //    }
-        //    else
-        //    {
-        //        Stop_+"{ServiceType}"+_Service();
-        //        serviceObject.IsServiceStopped = true;
-        //    }
-        //}
-
-        //public object View(value)
-        //{
-        //    if (value == "Email")
-        //        if (CopyData.IsVisible)
-        //            return false;
-        //    else if (value == "Copy")
-        //        if (UserData.IsVisible)
-        //            return false;
-        //}
-
+            //if (serviceObject.IsServiceStopped == true)
+            //{
+            //    typeof(MainWindowViewModel).GetMethod("Start_" + "{ServiceType}" + "_Service")();
+            //    serviceObject.IsServiceStopped = false;
+            //}
+            //else
+            //{
+            //    typeof(MainWindowViewModel).GetMethod("Stop_" + "{ServiceType}" + "_Service")();
+            //    serviceObject.IsServiceStopped = true;
+            //}
+        }
 
         public void Browse_Source()
         {

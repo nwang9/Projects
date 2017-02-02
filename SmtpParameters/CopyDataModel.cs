@@ -17,6 +17,7 @@ namespace SmtpParameters
             TargetPath = "";
             ServiceName = "Copy Service";
             IsServiceStopped = true;
+            IsVisible = false;
         }
 
         public string SourcePath

@@ -46,7 +46,7 @@ namespace SmtpParameters
 
         public void Execute(object parameter)
         {
-            this.ViewModel.Start_Stop_Click(parameter);
+            this.ViewModel.Start_Stop_Click(Convert.ToString(parameter));
         }
     }
 }

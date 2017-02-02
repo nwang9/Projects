@@ -22,6 +22,7 @@ namespace SmtpParameters
             IsServiceStopped = true;
             XmlFile = @"C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\EmailService\EmailService\emails.xml";
             ServiceName = "Email Service";
+            IsVisible = false;
         }
 
         public string Host

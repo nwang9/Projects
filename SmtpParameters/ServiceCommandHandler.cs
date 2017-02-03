@@ -7,16 +7,16 @@ using System.Windows.Input;
 
 namespace SmtpParameters
 {
-    public class EmailCommandHandler : ICommand
+    public class ServiceCommandHandler : ICommand
     {
-        public EmailControlViewModel ViewModel;
+        public MainWindowViewModel ViewModel;
         // constructor
-        public EmailCommandHandler(EmailControlViewModel viewModel)
+        public ServiceCommandHandler(MainWindowViewModel viewModel)
         {
             this.ViewModel = viewModel;
         }
 
-       
+
         private bool canExecute = true;
         private ICommand clickCommand;
         //setter
@@ -24,16 +24,16 @@ namespace SmtpParameters
         {
             get
             {
-                return clickCommand ?? (clickCommand = new EmailCommandHandler(() => MyAction(), canExecute));
+                return clickCommand ?? (clickCommand = new ServiceCommandHandler(() => MyAction(), canExecute));
             }
         }
         public void MyAction()
         {
 
         }
-       // Command Handler
+        // Command Handler
         private Action _action;
-        public EmailCommandHandler(Action action, bool canExecute)
+        public ServiceCommandHandler(Action action, bool canExecute)
         {
             action = _action;
         }
@@ -47,7 +47,7 @@ namespace SmtpParameters
 
         public void Execute(object parameter)
         {
-            ViewModel.Email_Browse();     
+            this.ViewModel.File_Browse();
         }
     }
 }

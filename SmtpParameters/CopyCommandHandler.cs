@@ -9,9 +9,9 @@ namespace SmtpParameters
 {
     public class CopyCommandHandler : ICommand
     {
-        public MainWindowViewModel ViewModel;
+        public CopyControlViewModel ViewModel;
         // constructor
-        public CopyCommandHandler(MainWindowViewModel viewModel)
+        public CopyCommandHandler(CopyControlViewModel viewModel)
         {
             this.ViewModel = viewModel;
         }

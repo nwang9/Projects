@@ -20,10 +20,28 @@ namespace SmtpParameters
     /// </summary>
     public partial class EmailControl : UserControl
     {
- 
+        //public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register
+        //    (
+        //         "EmailViewModel",
+        //         typeof(MainWindowViewModel),
+        //         typeof(EmailControl)
+        //    );
+
+        //public MainWindowViewModel ViewModel
+        //{
+        //    get { return (MainWindowViewModel)GetValue(ViewModelProperty); }
+        //    set { SetValue(ViewModelProperty, value); }
+        //}
+
         public EmailControl()
         {
             InitializeComponent();
+
+            //Loaded += (sender, args) =>
+            //{
+            //    MainWindowViewModel vm = new MainWindowViewModel(ViewModel);
+            //    this.DataContext = vm;
+            //};
         }
     }
 }

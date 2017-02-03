@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="CopyCommandHandler.cs" />
+    <Compile Include="CopyControlViewModel.cs" />
     <Compile Include="CopyDataModel.cs" />
     <Compile Include="CopyUserControl.xaml.cs">
       <DependentUpon>CopyUserControl.xaml</DependentUpon>
@@ -68,10 +69,12 @@
     <Compile Include="EmailCommandHandler.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToStartStopServiceButtonTextConverter.cs" />
+    <Compile Include="EmailControlViewModel.cs" />
     <Compile Include="ServiceBase.cs" />
     <Compile Include="EmailControl.xaml.cs">
       <DependentUpon>EmailControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServiceCommandHandler.cs" />
     <Compile Include="SmtpDataModel.cs" />
     <Compile Include="StartStopCommandHandler.cs" />
     <Page Include="CopyUserControl.xaml">

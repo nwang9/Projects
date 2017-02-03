@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:conv="clr-namespace:SmtpParameters.Converters"
-             DataContext="{Binding SelectedService}">
+             >
     <UserControl.Resources>
         <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />
         <conv:BoolToColorConverter x:Key="ColorConverter" />
@@ -31,7 +31,7 @@
                     <TextBox Name="HostText" IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" FontSize="12" FontWeight="Bold" Foreground="Black" Width="Auto" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                 </Border>
-                <Button Content="Browse Email Files" Command="{Binding ServiceSelectionClickCommand}" CommandParameter="Browse"/>
+                <Button Content="Browse Email Files" Command="{Binding EmailClickCommand}" CommandParameter="Browse"/>
                 <TextBox TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding XmlFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
         </StackPanel>
     </Grid>

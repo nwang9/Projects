@@ -44,11 +44,11 @@
         <UserControl>
             <UserControl.Resources>
                 <DataTemplate DataType="{x:Type local:SmtpDataModel}">
-                    <local:EmailControl></local:EmailControl>
-                </DataTemplate>
+                        <local:EmailControl DataContext="{Binding Vm, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                    </DataTemplate>
                 <DataTemplate DataType="{x:Type local:CopyDataModel}">
-                    <local:CopyUserControl></local:CopyUserControl>
-                </DataTemplate>
+                        <local:CopyUserControl DataContext="{Binding Vm, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                    </DataTemplate>
             </UserControl.Resources>
 
             <ContentControl Content="{Binding SelectedService}" />

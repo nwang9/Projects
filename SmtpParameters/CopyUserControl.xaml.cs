@@ -15,14 +15,30 @@ using System.Windows.Shapes;
 
 namespace SmtpParameters
 {
-    /// <summary>
-    /// Interaction logic for CopyUserControl.xaml
-    /// </summary>
+
     public partial class CopyUserControl : UserControl
     {
+        //public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register
+        //   (
+        //        "CopyViewModel",
+        //        typeof(MainWindowViewModel),
+        //        typeof(CopyUserControl)
+        //   );
+
+        //public MainWindowViewModel ViewModel
+        //{
+        //    get { return (MainWindowViewModel)GetValue(ViewModelProperty); }
+        //    set { SetValue(ViewModelProperty, value); }
+        //}
+
         public CopyUserControl()
         {
             InitializeComponent();
+            //Loaded += (sender, args) =>
+            //{
+            //    MainWindowViewModel vm = new MainWindowViewModel(ViewModel);
+            //    this.DataContext = vm;
+            //};
         }
     }
 }

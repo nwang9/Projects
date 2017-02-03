@@ -7,7 +7,6 @@
              xmlns:conv="clr-namespace:SmtpParameters.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding SelectedService}"
              >
     <UserControl.Resources>
         <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />

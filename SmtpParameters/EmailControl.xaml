@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="SmtpParameters.EmailControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmtpParameters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:conv="clr-namespace:SmtpParameters.Converters"
+             DataContext="{Binding SelectedService}">
+    <UserControl.Resources>
+        <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />
+        <conv:BoolToColorConverter x:Key="ColorConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Background="{Binding IsServiceStopped, Converter={StaticResource ColorConverter}}" >
+                <Label FontWeight="Bold">Email Service</Label>
+                <CheckBox IsChecked="{Binding UseDefaultCredentials, Mode=TwoWay}" 
+        IsEnabled="{Binding IsServiceStopped, Mode=OneWay}">Use Default Credentials
+                </CheckBox>
+                <CheckBox IsChecked="{Binding EnableSs1, Mode=TwoWay}" 
+        IsEnabled="{Binding IsServiceStopped, Mode=OneWay}">Enable Ssl
+                </CheckBox>
+                <AccessText Text="Port:  "/>
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <TextBox Name="PortText" IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" FontSize="12" FontWeight="Bold" Foreground="Black" Width="Auto" Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                </Border>
+                <AccessText Text="Host:  " />
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <TextBox Name="HostText" IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" FontSize="12" FontWeight="Bold" Foreground="Black" Width="Auto" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                </Border>
+                <Button Content="Browse Email Files" Command="{Binding ServiceSelectionClickCommand}" CommandParameter="Browse"/>
+                <TextBox TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding XmlFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

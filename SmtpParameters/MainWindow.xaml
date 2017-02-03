@@ -6,77 +6,55 @@
         xmlns:local="clr-namespace:SmtpParameters"
         xmlns:conv="clr-namespace:SmtpParameters.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="450" Width="625">
     <Window.Resources>
+        <!--<UserControl DataType="{x:Type local:SmtpDataModel}">
+        </UserControl>-->
         <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />
         <conv:BoolToColorConverter x:Key="ColorConverter" />
         <conv:BoolToVisibilityConverter x:Key="ViewConverter" />
     </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+
                 <Button Content="Browse" Command="{Binding ServiceSelectionClickCommand}" CommandParameter="Browse Files"/>
-            </Grid>
-           
-            <ListBox Width="Auto" Grid.Row="1" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService, Mode=TwoWay}">
+
+            <ListBox Width="Auto" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService, Mode=TwoWay}" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,-0.333,-0.333">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Text="{Binding Path=ServiceName}" />
                             <Button Content="{Binding Path=IsServiceStopped, Converter={StaticResource converter}}" 
-                             Command="{Binding StartClickCommand}" CommandParameter="{Binding Path=ServiceType}" Height="41" Margin="0,0,-0.333,0" VerticalAlignment="Bottom"/>
+                             Command="{Binding StartClickCommand}" CommandParameter="{Binding Path=ServiceType}" VerticalAlignment="Bottom"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+        <Grid Grid.Row="1">
+        <UserControl>
+            <UserControl.Resources>
+                <DataTemplate DataType="{x:Type local:SmtpDataModel}">
+                    <local:EmailControl></local:EmailControl>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:CopyDataModel}">
+                    <local:CopyUserControl></local:CopyUserControl>
+                </DataTemplate>
+            </UserControl.Resources>
 
-        <Grid Grid.Row="0">
-            <ItemsControl ItemsSource="{Binding SelectedService}">
-                <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type local:SmtpDataModel}">
-                    <StackPanel Background="{Binding IsServiceStopped, Converter={StaticResource ColorConverter}}" >
-                    <Label FontWeight="Bold">Email Service</Label>
-                    <CheckBox IsChecked="{Binding UseDefaultCredentials, Mode=TwoWay}" 
-             IsEnabled="{Binding IsServiceStopped, Mode=OneWay}">Use Default Credentials
-                    </CheckBox>
-                    <CheckBox IsChecked="{Binding EnableSs1, Mode=TwoWay}" 
-             IsEnabled="{Binding IsServiceStopped, Mode=OneWay}">Enable Ssl
-                    </CheckBox>
-                    <AccessText Text="Port:  "/>
-                    <Border BorderBrush="Black" BorderThickness="1">
-                        <TextBox Name="PortText" IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" FontSize="12" FontWeight="Bold" Foreground="Black" Width="Auto" Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}">
-                        </TextBox>
-                    </Border>
-                    <AccessText Text="Host:  " />
-                    <Border BorderBrush="Black" BorderThickness="1">
-                        <TextBox Name="HostText" IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" FontSize="12" FontWeight="Bold" Foreground="Black" Width="Auto" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}">
-                        </TextBox>
-                    </Border>
-                    <Button Content="Browse" Command="{Binding ServiceSelectionClickCommand}" CommandParameter="Browse"/>
-                    <TextBox TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding XmlFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
-                </StackPanel>
-                    </DataTemplate>
+            <ContentControl Content="{Binding SelectedService}" />
 
-                    <DataTemplate DataType="{x:Type local:CopyDataModel}">
-                        <StackPanel Name="CopyGrid" Background="{Binding IsServiceStopped, Converter={StaticResource ColorConverter}}" >
-                        <Label FontWeight="Bold">FileCopy Service</Label>
-                        <Button Content="Browse Target Source" Command="{Binding CopyClickCommand}" CommandParameter="Browse_Source"/>
-                        <TextBox IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding SourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
-                        <Button Content="Browse Target Path" Command="{Binding CopyClickCommand}" CommandParameter="Browse_Target"/>
-                    <TextBox IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding SourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
-                </StackPanel>
-        </DataTemplate>
-                </ItemsControl.Resources>
-            </ItemsControl>
+        </UserControl>
         </Grid>
+
     </Grid>
 </Window>

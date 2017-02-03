@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\App.xaml
-11151548125
+3-610994844
 
-201738404532
+22265422347
 17-276932131
-MainWindow.xaml;
+CopyUserControl.xaml;MainWindow.xaml;EmailControl.xaml;
 
-False
+True
 

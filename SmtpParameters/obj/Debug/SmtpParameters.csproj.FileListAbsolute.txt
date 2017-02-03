@@ -23,3 +23,7 @@ C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpPara
 C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\SmtpParameters.csproj.GenerateResource.Cache
 C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\SmtpParameters.exe
 C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\SmtpParameters.pdb
+C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\CopyUserControl.g.cs
+C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\EmailControl.g.cs
+C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\CopyUserControl.baml
+C:\Users\nicowang9\Documents\Visual Studio 2015\Projects\SmtpParameters\SmtpParameters\obj\Debug\EmailControl.baml

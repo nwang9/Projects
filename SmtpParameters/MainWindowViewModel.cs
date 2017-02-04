@@ -89,8 +89,6 @@ namespace SmtpParameters
         public void Start_Stop_Click(string serviceType)
         {
             //string ServiceType = serviceType;
-            //object serviceObject = Services.Find(x => x.ServiceName.Contains(ServiceType));
-
             //if (serviceObject.IsServiceStopped == true)
             //{
             //    typeof(MainWindowViewModel).GetMethod("Start_" + "{ServiceType}" + "_Service")();

@@ -34,8 +34,8 @@ namespace SmtpParameters
         public EmailControl()
         {
             InitializeComponent();
-            EmailControlViewModel vm = new EmailControlViewModel();
-            Root.DataContext = vm;
+            //EmailControlViewModel vm = new EmailControlViewModel();
+            Root.DataContext = this;
         }
     }
 }

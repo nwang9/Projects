@@ -34,8 +34,7 @@ namespace SmtpParameters
         public CopyUserControl()
         {
             InitializeComponent();
-            CopyControlViewModel vm = new CopyControlViewModel();
-            this.DataContext = vm;
+            Root.DataContext = this;
         }
     }
 }

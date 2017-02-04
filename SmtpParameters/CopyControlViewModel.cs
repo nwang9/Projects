@@ -14,7 +14,6 @@ namespace SmtpParameters
         public CopyControlViewModel()
         {
             this.CopyClickCommand = new CopyCommandHandler(this);
-            CopyData = new CopyDataModel();
         }
 
         public CopyCommandHandler CopyClickCommand { get; set; }

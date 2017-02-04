@@ -11,6 +11,11 @@
         <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />
         <conv:BoolToColorConverter x:Key="ColorConverter" />
         <conv:BoolToVisibilityConverter x:Key="ViewConverter" />
+
+        <!--<DataTemplate x:Key="testTemplate" DataType="{x:Type local:SmtpDataModel}">
+            <local:EmailControl UserData="{Binding}" />
+        </DataTemplate>-->
+
     </Window.Resources>
 
     <Grid>
@@ -40,19 +45,20 @@
         </Grid>
         <Grid Grid.Row="1">
             <!--<local:EmailControl UserData="{Binding UserData}" />-->
-        <UserControl>
+            <UserControl>
             <UserControl.Resources>
                 <DataTemplate DataType="{x:Type local:SmtpDataModel}">
-                        <local:EmailControl UserData="{Binding UserData}" />
+                        <local:EmailControl UserData="{Binding}" />
                     </DataTemplate>
                 <DataTemplate DataType="{x:Type local:CopyDataModel}">
-                        <local:CopyUserControl CopyData="{Binding CopyData}"/>
+                        <local:CopyUserControl CopyData="{Binding}"/>
                     </DataTemplate>
             </UserControl.Resources>
 
             <ContentControl Content="{Binding SelectedService}" />
 
             </UserControl>
+            <!--<ContentControl Content="{Binding SelectedService}" ContentTemplate="{StaticResource testTemplate}"/>-->
         </Grid>
 
     </Grid>

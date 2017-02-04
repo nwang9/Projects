@@ -13,12 +13,12 @@
         <conv:BoolToColorConverter x:Key="ColorConverter" />
     </UserControl.Resources>
     <Grid>
-        <StackPanel Name="CopyGrid" Background="{Binding CopyData.IsServiceStopped, Converter={StaticResource ColorConverter}}" >
+        <StackPanel Name="CopyGrid" Background="{Binding IsServiceStopped, Converter={StaticResource ColorConverter}}" >
                 <Label FontWeight="Bold">FileCopy Service</Label>
                 <Button Content="Browse Target Source" Command="{Binding CopyClickCommand}" CommandParameter="Browse_Source"/>
-            <TextBox IsEnabled="{Binding CopyData.IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding CopyData.SourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
+            <TextBox IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding CopyData.SourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
                 <Button Content="Browse Target Path" Command="{Binding CopyClickCommand}" CommandParameter="Browse_Target"/>
-            <TextBox IsEnabled="{Binding CopyData.IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding CopyData.TargetPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
+            <TextBox IsEnabled="{Binding IsServiceStopped, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height ="50" Text="{Binding CopyData.TargetPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="12" Width="Auto"/>
             </StackPanel>
     </Grid>
 </UserControl>

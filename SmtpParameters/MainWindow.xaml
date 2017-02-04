@@ -8,8 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="625">
     <Window.Resources>
-        <!--<UserControl DataType="{x:Type local:SmtpDataModel}">
-        </UserControl>-->
         <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />
         <conv:BoolToColorConverter x:Key="ColorConverter" />
         <conv:BoolToVisibilityConverter x:Key="ViewConverter" />
@@ -41,19 +39,20 @@
             </ListBox>
         </Grid>
         <Grid Grid.Row="1">
+            <!--<local:EmailControl UserData="{Binding UserData}" />-->
         <UserControl>
             <UserControl.Resources>
                 <DataTemplate DataType="{x:Type local:SmtpDataModel}">
-                        <local:EmailControl DataContext="{Binding Vm, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                        <local:EmailControl UserData="{Binding UserData}" />
                     </DataTemplate>
                 <DataTemplate DataType="{x:Type local:CopyDataModel}">
-                        <local:CopyUserControl DataContext="{Binding Vm, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                        <local:CopyUserControl CopyData="{Binding CopyData}"/>
                     </DataTemplate>
             </UserControl.Resources>
 
             <ContentControl Content="{Binding SelectedService}" />
 
-        </UserControl>
+            </UserControl>
         </Grid>
 
     </Grid>

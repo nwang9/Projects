@@ -14,13 +14,13 @@ namespace SmtpParameters
     {
         public EmailControlViewModel()
         {
-            UserData = new SmtpDataModel();
             this.EmailClickCommand = new EmailCommandHandler(this);
+            UserData = new SmtpDataModel();
             FillUserData();
         }
-        public SmtpDataModel UserData
-        { get; set; }
+
         public EmailCommandHandler EmailClickCommand { get; set; }
+        public SmtpDataModel UserData { get; set; }
 
         //Fill_User_Data method
         public void FillUserData()
@@ -51,8 +51,6 @@ namespace SmtpParameters
             doc.GetElementsByTagName("Port")[0].InnerText = Convert.ToString(UserData.Port);
             doc.GetElementsByTagName("UseDefaultCredentials")[0].InnerText = Convert.ToString(UserData.UseDefaultCredentials);
             doc.GetElementsByTagName("EnableSs1")[0].InnerText = Convert.ToString(UserData.EnableSs1);
-
-
             // Save changes
             doc.Save(xmlFile);
 
@@ -62,7 +60,6 @@ namespace SmtpParameters
             {
                 EmailService.Start();
                 EmailService.Refresh();
-
             }
             catch
             {

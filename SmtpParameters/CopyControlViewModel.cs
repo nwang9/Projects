@@ -13,13 +13,14 @@ namespace SmtpParameters
     {
         public CopyControlViewModel()
         {
-            CopyData = new CopyDataModel();
             this.CopyClickCommand = new CopyCommandHandler(this);
+            CopyData = new CopyDataModel();
         }
 
+        public CopyCommandHandler CopyClickCommand { get; set; }
         public CopyDataModel CopyData
         { get; set; }
-        public CopyCommandHandler CopyClickCommand { get; set; }
+
 
         public void Browse_Source()
         {

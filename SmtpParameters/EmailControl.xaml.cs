@@ -15,33 +15,27 @@ using System.Windows.Shapes;
 
 namespace SmtpParameters
 {
-    /// <summary>
-    /// Interaction logic for ServiceControl.xaml
-    /// </summary>
+
     public partial class EmailControl : UserControl
     {
-        //public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register
-        //    (
-        //         "EmailViewModel",
-        //         typeof(MainWindowViewModel),
-        //         typeof(EmailControl)
-        //    );
+        public static DependencyProperty UserDataProperty = DependencyProperty.Register
+            (
+                 "UserData",
+                 typeof(SmtpDataModel),
+                 typeof(EmailControl)
+            );
 
-        //public MainWindowViewModel ViewModel
-        //{
-        //    get { return (MainWindowViewModel)GetValue(ViewModelProperty); }
-        //    set { SetValue(ViewModelProperty, value); }
-        //}
+        public SmtpDataModel UserData
+        {
+            get { return (SmtpDataModel)GetValue(UserDataProperty); }
+            set { SetValue(UserDataProperty, value); }
+        }
 
         public EmailControl()
         {
             InitializeComponent();
-
-            //Loaded += (sender, args) =>
-            //{
-            //    MainWindowViewModel vm = new MainWindowViewModel(ViewModel);
-            //    this.DataContext = vm;
-            //};
+            EmailControlViewModel vm = new EmailControlViewModel();
+            Root.DataContext = vm;
         }
     }
 }

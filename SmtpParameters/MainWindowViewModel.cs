@@ -10,6 +10,7 @@ namespace SmtpParameters
     public class MainWindowViewModel : ObservableObject
     {
         private ServiceBase selectedService;
+        private SmtpDataModel userData;
 
         public ServiceBase SelectedService
         {
@@ -22,11 +23,27 @@ namespace SmtpParameters
 
         public MainWindowViewModel()
         {
+            UserData = new SmtpDataModel();
+            CopyData = new CopyDataModel();
             this.ServiceSelectionClickCommand = new ServiceCommandHandler(this);
             this.StartClickCommand = new StartStopCommandHandler(this);
         }
         System.Collections.ObjectModel.ObservableCollection<ServiceBase> services = new System.Collections.ObjectModel.ObservableCollection<ServiceBase>();
         // Accessors
+
+        public CopyDataModel CopyData
+        { get; set; }
+
+        public SmtpDataModel UserData
+        {
+            get { return userData; }
+            set
+            {
+                userData = value;
+                OnPropertyChanged();
+            }
+        }
+
         public System.Collections.ObjectModel.ObservableCollection<ServiceBase> Services
         {
             get { return services; }
@@ -58,7 +75,7 @@ namespace SmtpParameters
             if (result == true)
             {
                 // Open document
-                XmlFile = dlg.FileName;
+                UserData.XmlFile = dlg.FileName;
                 //Find service type and add serice
                 XmlDocument doc = new XmlDocument();
                 doc.Load(UserData.XmlFile);

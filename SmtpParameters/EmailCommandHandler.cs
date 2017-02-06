@@ -9,9 +9,9 @@ namespace SmtpParameters
 {
     public class EmailCommandHandler : ICommand
     {
-        public EmailControlViewModel ViewModel;
+        public MainWindowViewModel ViewModel;
         // constructor
-        public EmailCommandHandler(EmailControlViewModel viewModel)
+        public EmailCommandHandler(MainWindowViewModel viewModel)
         {
             this.ViewModel = viewModel;
         }

@@ -7,11 +7,11 @@ using System.Windows.Input;
 
 namespace SmtpParameters
 {
-    public class CopyCommandHandler : ICommand
+    public class StartStopCommandHandler : ICommand
     {
         public MainWindowViewModel ViewModel;
         // constructor
-        public CopyCommandHandler(MainWindowViewModel viewModel)
+        public StartStopCommandHandler(MainWindowViewModel viewModel)
         {
             this.ViewModel = viewModel;
         }
@@ -23,7 +23,7 @@ namespace SmtpParameters
         {
             get
             {
-                return clickCommand ?? (clickCommand = new CopyCommandHandler(() => MyAction(), canExecute));
+                return clickCommand ?? (clickCommand = new StartStopCommandHandler(() => MyAction(), canExecute));
             }
         }
         public void MyAction()
@@ -32,7 +32,7 @@ namespace SmtpParameters
         }
         // Command Handler
         private Action _action;
-        public CopyCommandHandler(Action action, bool canExecute)
+        public StartStopCommandHandler(Action action, bool canExecute)
         {
             action = _action;
         }
@@ -46,11 +46,7 @@ namespace SmtpParameters
 
         public void Execute(object parameter)
         {
-            if (Convert.ToString(parameter) == "Browse_Source")
-                this.ViewModel.Browse_Source();
-            else if (Convert.ToString(parameter) == "Browse_Target")
-                this.ViewModel.Browse_Target();
-
+            this.ViewModel.Start_Stop_Click(Convert.ToString(parameter));
         }
     }
 }

@@ -47,12 +47,7 @@ namespace SmtpParameters
 
         public void Execute(object parameter)
         {
-            if (Convert.ToString(parameter) == "Browse")
-                this.ViewModel.Email_Browse();
-            else if (Convert.ToString(parameter) == "Browse Files")
-                this.ViewModel.File_Browse();
-            else
-                this.ViewModel.Email_Click();          
+            ViewModel.Email_Browse();     
         }
     }
 }

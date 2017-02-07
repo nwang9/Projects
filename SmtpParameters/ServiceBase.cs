@@ -13,6 +13,7 @@ namespace SmtpParameters
         public string serviceType;
         public int serviceInterval;
         public bool isServiceStopped;
+        public bool isVisible;
 
         //public override string ToString()
         //{
@@ -36,6 +37,19 @@ namespace SmtpParameters
             set
             {
                 xmlFile = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsVisible
+        {
+            get
+            {
+                return isVisible;
+            }
+            set
+            {
+                isVisible = value;
                 OnPropertyChanged();
             }
         }

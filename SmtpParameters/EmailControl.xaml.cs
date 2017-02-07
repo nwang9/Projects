@@ -18,24 +18,22 @@ namespace SmtpParameters
 
     public partial class EmailControl : UserControl
     {
-        public static DependencyProperty UserDataProperty = DependencyProperty.Register
-            (
-                 "UserData",
-                 typeof(SmtpDataModel),
-                 typeof(EmailControl)
-            );
+        //    public static DependencyProperty UserDataProperty = DependencyProperty.Register
+        //        (
+        //             "UserData",
+        //             typeof(MainWindowViewModel),
+        //             typeof(EmailControl)
+        //        );
 
-        public SmtpDataModel UserData
-        {
-            get { return (SmtpDataModel)GetValue(UserDataProperty); }
-            set { SetValue(UserDataProperty, value); }
-        }
+        //    public MainWindowViewModel UserData
+        //    {
+        //        get { return (MainWindowViewModel)GetValue(UserDataProperty); }
+        //        set { SetValue(UserDataProperty, value); }
+        //    }
 
         public EmailControl()
         {
-            InitializeComponent();
-            //EmailControlViewModel vm = new EmailControlViewModel();
-            Root.DataContext = this;
+            InitializeComponent();  
         }
     }
 }

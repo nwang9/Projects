@@ -18,23 +18,23 @@ namespace SmtpParameters
 
     public partial class CopyUserControl : UserControl
     {
-        public static DependencyProperty CopyModelProperty = DependencyProperty.Register
-           (
-                "CopyData",
-                typeof(CopyDataModel),
-                typeof(CopyUserControl)
-           );
+        //    public static DependencyProperty CopyModelProperty = DependencyProperty.Register
+        //       (
+        //            "CopyData",
+        //            typeof(MainWindowViewModel),
+        //            typeof(CopyUserControl)
+        //       );
 
-        public CopyDataModel CopyData
-        {
-            get { return (CopyDataModel)GetValue(CopyModelProperty); }
-            set { SetValue(CopyModelProperty, value); }
-        }
+        //    public CopyDataModel CopyData
+        //    {
+        //        get { return (CopyDataModel)GetValue(CopyModelProperty); }
+        //        set { SetValue(CopyModelProperty, value); }
+        //    }
 
         public CopyUserControl()
         {
             InitializeComponent();
-            Root.DataContext = this;
+            //DataContext = this;
         }
     }
 }

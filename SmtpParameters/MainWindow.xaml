@@ -11,11 +11,7 @@
         <conv:BoolToStartStopServiceButtonTextConverter x:Key="converter" />
         <conv:BoolToColorConverter x:Key="ColorConverter" />
         <conv:BoolToVisibilityConverter x:Key="ViewConverter" />
-
-        <!--<DataTemplate x:Key="testTemplate" DataType="{x:Type local:SmtpDataModel}">
-            <local:EmailControl UserData="{Binding}" />
-        </DataTemplate>-->
-
+        <local:MainWindowViewModel x:Key="myViewModel" x:Name="myVM" />
     </Window.Resources>
 
     <Grid>
@@ -44,21 +40,17 @@
             </ListBox>
         </Grid>
         <Grid Grid.Row="1">
-            <!--<local:EmailControl UserData="{Binding UserData}" />-->
             <UserControl>
-            <UserControl.Resources>
-                <DataTemplate DataType="{x:Type local:SmtpDataModel}">
-                        <local:EmailControl UserData="{Binding}" />
+                <UserControl.Resources>
+                    <DataTemplate DataType="{x:Type local:SmtpDataModel}">
+                        <local:EmailControl  DataContext="{StaticResource myViewModel}"/>
                     </DataTemplate>
-                <DataTemplate DataType="{x:Type local:CopyDataModel}">
-                        <local:CopyUserControl CopyData="{Binding}"/>
+                    <DataTemplate DataType="{x:Type local:CopyDataModel}">
+                        <local:CopyUserControl DataContext="{StaticResource myViewModel}"/>
                     </DataTemplate>
-            </UserControl.Resources>
-
-            <ContentControl Content="{Binding SelectedService}" />
-
+                </UserControl.Resources>
+                <ContentControl Content="{Binding SelectedService}"/>
             </UserControl>
-            <!--<ContentControl Content="{Binding SelectedService}" ContentTemplate="{StaticResource testTemplate}"/>-->
         </Grid>
 
     </Grid>
